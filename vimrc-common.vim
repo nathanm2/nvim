@@ -47,6 +47,8 @@ set smartcase
 " Show both the current line number and relative line numbers.
 set number relativenumber
 
+" Set the window title
+set title
 
 "function! WindowWidth()
 "    if &textwidth != 0

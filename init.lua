@@ -25,8 +25,12 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- Neovide --
 
 -- Set the GUI font:
-vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h11"
+vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"
 -- vim.opt.guifont = "DroidSansM Nerd Font Mono:h11"
+
+-- Neovide cursor animation time in seconds:
+--   0 = disables cursor animation.
+vim.g.neovide_cursor_animation_length = 0
 
 -- Plugins --
 require("user.lazy")
