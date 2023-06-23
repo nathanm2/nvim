@@ -20,9 +20,9 @@ set termguicolors
 " noremap <F2> "+d
 " noremap <F3> "+p
 "
-" However, there appears to be a much better way: simply adding 'unnamedplus' to the
-" clipboard setting causes vim to use the CLIPBOARD buffer instead of the
-" UNNAMED buffer!
+" However, there appears to be a much better way: simply adding 'unnamedplus'
+" to the clipboard setting causes vim to use the CLIPBOARD buffer instead of
+" the UNNAMED buffer!
 set clipboard+=unnamedplus
 
 " <Tab> behavior in normal mode:
@@ -50,13 +50,19 @@ set number relativenumber
 " Set the window title
 set title
 
-"function! WindowWidth()
-"    if &textwidth != 0
-"        let &l:winwidth=&textwidth + 5
-"    endif
-"endfunction
+" Highlight the textwidth+1 column:
+set colorcolumn=+1
 
-"autocmd WinEnter * :call WindowWidth()
+" Automatically resize a window if textwidth is non-zero.
+"
+" The window width is textwidth + line-number (prefix) + colorcolumn (suffix)
+function! AutoResizeWindow()
+    if &textwidth != 0
+    	let &l:winwidth=&textwidth + getwininfo(win_getid())[0].textoff + 1
+    endif
+endfunction
+
+autocmd WinEnter * :call AutoResizeWindow()
 
 " Common Key Maps ===============================================
 
@@ -100,8 +106,8 @@ endfunction
 
 " Resize with arrows
 "
-" NOTE: This feels natural for the top-left window, but a bit surprising when dealing with windows
-" on the bottom or the right.
+" NOTE: This feels natural for the top-left window, but a bit surprising when
+" dealing with windows on the bottom or the right.
 nnoremap <c-up> :resize -2<CR>
 nnoremap <c-down> :resize +2<CR>
 nnoremap <c-left> :vertical resize -2<CR>
