@@ -47,7 +47,7 @@ set smartcase
 " Show both the current line number and relative line numbers.
 set number relativenumber
 
-" Set the window title
+" Set the terminal window title
 set title
 
 " Highlight the textwidth+1 column:
@@ -55,14 +55,24 @@ set colorcolumn=+1
 
 " Automatically resize a window if textwidth is non-zero.
 "
-" The window width is textwidth + line-number (prefix) + colorcolumn (suffix)
-function! AutoResizeWindow()
+" The window width is calculated to be:
+"    textwidth + line-number (prefix) + colorcolumn (suffix)
+"
+function! s:AutoResizeWindow()
     if &textwidth != 0
-    	let &l:winwidth=&textwidth + getwininfo(win_getid())[0].textoff + 1
+        let &l:winwidth=&textwidth + getwininfo(win_getid())[0].textoff + 1
     endif
 endfunction
 
-autocmd WinEnter * :call AutoResizeWindow()
+" It's considered good practice to put all auto commands into a group.
+"
+" In case this file is sourced more than once, we can use 'autocmd!' to remove
+" the group's autocommands before adding them again.  This prevents the same
+" autocommand from being run more than once.
+augroup window_auto
+    autocmd!
+    autocmd WinEnter * :call s:AutoResizeWindow()
+augroup END
 
 " Common Key Maps ===============================================
 
@@ -92,9 +102,9 @@ nnoremap <silent><expr> j v:count == 0 ? "gj" : "j"
 nnoremap <silent><expr> k v:count == 0 ? "gk" : "k"
 
 " Toggle between absolute/relative/none line numbering
-nnoremap <silent> <leader>l :call ToggleLineNumberType()<cr>
+nnoremap <silent> <leader>l :call s:ToggleLineNumberType()<cr>
 
-function! ToggleLineNumberType()
+function! s:ToggleLineNumberType()
     if &relativenumber && &number
         setlocal norelativenumber
     elseif &number
@@ -148,4 +158,3 @@ inoremap UU <esc>gUawea
 " Stay in indent mode
 vnoremap < <gv
 vnoremap > >gv
-

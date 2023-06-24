@@ -11,13 +11,13 @@ local carbonfox_opts = {
   },
 }
 
-function carbonfox_config(plugin, opts)
+local function carbonfox_config(plugin, opts)
   require("nightfox").setup(opts)
   -- load the colorscheme here
   vim.cmd([[colorscheme carbonfox]])
 end
 
-function gruvbox_config(plugin, opts)
+local function gruvbox_config(plugin, opts)
   require("gruvbox").setup(opts)
   -- load the colorscheme here
   vim.cmd([[colorscheme gruvbox]])
