@@ -7,6 +7,7 @@ local config_dir = vim.fn.stdpath("config")
 local vimrc = config_dir .. "/vimrc-common.vim"
 vim.cmd.source(vimrc)
 
+
 ----- Key Maps ----- 
 
 -- Make it easier to edit the keymappings:
@@ -22,7 +23,7 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- Neovide --
+----- Neovide -----
 
 -- Set the GUI font:
 vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"

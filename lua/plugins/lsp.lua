@@ -33,6 +33,18 @@ local function config(plugin, opts)
     end
   })
 
+  local function toggle_lsp_autoformat()
+    vim.g.lsp_autoformat = not vim.g.lsp_autoformat
+    if vim.g.lsp_autoformat then
+      print("Enabled format on save")
+    else
+      print("Disabled format on save")
+    end
+  end
+
+  vim.keymap.set("n", "<Leader>uf", toggle_lsp_autoformat,
+    {desc = "Toggle format on save"})
+
 end
 
 
