@@ -132,9 +132,7 @@ nnoremap <leader>e :Lex 30<cr>
 
 " Navigate between buffers:
 nnoremap [b <cmd>exe v:count .. "bprevious"<cr>
-nnoremap <s-h> :bprevious<cr>
 nnoremap ]b <cmd>exe v:count .. "bnext"<cr>
-nnoremap <s-l> :bnext<cr>
 nnoremap <leader>bb :e #<cr>
 
 " Navigate the quickfix list

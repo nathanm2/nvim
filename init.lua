@@ -11,17 +11,17 @@ vim.cmd.source(vimrc)
 ----- Key Maps ----- 
 
 -- Make it easier to edit the keymappings:
-local term_opts = { silent = true }
+local keymap_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
-keymap("n", "<Leader>on", ":edit $MYVIMRC<CR>", term_opts)
-keymap("n", "<Leader>ov", string.format(":edit %s<CR>", vimrc), term_opts)
+keymap("n", "<Leader>on", ":edit $MYVIMRC<CR>", keymap_opts)
+keymap("n", "<Leader>ov", string.format(":edit %s<CR>", vimrc), keymap_opts)
 
 -- Terminal --
 -- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", keymap_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", keymap_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", keymap_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
 
 ----- Neovide -----
 
@@ -35,3 +35,11 @@ vim.g.neovide_cursor_animation_length = 0
 
 -- Plugins --
 require("user.lazy")
+
+-- LSP Formatting Setup --
+local format = require("user.lsp.format")
+format.setup{autoformat = true}
+vim.keymap.set("n", "<Leader>uf", format.toggle, {
+  silent = true,
+  desc = "Toggle autoformat on write (LSP)",
+})
