@@ -102,9 +102,9 @@ nnoremap <silent><expr> j v:count == 0 ? "gj" : "j"
 nnoremap <silent><expr> k v:count == 0 ? "gk" : "k"
 
 " Toggle between absolute/relative/none line numbering
-nnoremap <silent> <leader>l :call s:ToggleLineNumberType()<cr>
+nnoremap <silent> <leader>ul :call ToggleLineNumberType()<cr>
 
-function! s:ToggleLineNumberType()
+function! ToggleLineNumberType()
     if &relativenumber && &number
         setlocal norelativenumber
     elseif &number

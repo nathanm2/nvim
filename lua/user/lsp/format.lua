@@ -11,7 +11,12 @@ end
 
 -- Toggle the 'autoformat' setting:
 function M.toggle()
-  M.opts.autoformat = not M.opts.autoformat
+  if vim.b.autoformat == false then
+    vim.b.autoformat = nil
+    M.opts.autoformat = true
+  else
+    M.opts.autoformat = not M.opts.autoformat
+  end
   if M.opts.autoformat then
     print("Enabled format on save")
   else
@@ -22,6 +27,11 @@ end
 ---@param opts? {force?:boolean}
 function M.format(opts)
   local buf = vim.api.nvim_get_current_buf()
+
+  if vim.b.autoformat == false and not (opts and opts.force) then
+    return
+  end
+
   local formatters = M.get_formatters(buf)
   local client_ids = vim.tbl_map(function(client)
     return client.id

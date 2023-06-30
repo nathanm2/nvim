@@ -36,10 +36,21 @@ vim.g.neovide_cursor_animation_length = 0
 -- Plugins --
 require("user.lazy")
 
--- LSP Formatting Setup --
+-- Autoformat --
 local format = require("user.lsp.format")
-format.setup{autoformat = true}
-vim.keymap.set("n", "<Leader>uf", format.toggle, {
-  silent = true,
+
+format.setup{autoformat = false}
+
+vim.keymap.set("n", "<Leader>uf", format.toggle, { silent = true,
   desc = "Toggle autoformat on write (LSP)",
 })
+
+vim.keymap.set("n", "<Leader>cf",
+  function()
+    require("user.lsp.format").format{force = true}
+  end,
+  {
+    silent = true,
+    desc = "Format document (LSP)",
+  }
+)
