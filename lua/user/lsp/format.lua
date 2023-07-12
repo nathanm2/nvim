@@ -6,18 +6,18 @@ local M = {}
 M.opts = nil
 
 function M.enabled()
-  return M.opts.autoformat
+  return vim.g.AutoFormat == 1
 end
 
--- Toggle the 'autoformat' setting:
+-- Toggle the 'AutoFormat' setting:
 function M.toggle()
   if vim.b.autoformat == false then
     vim.b.autoformat = nil
-    M.opts.autoformat = true
+    vim.g.AutoFormat = 1
   else
-    M.opts.autoformat = not M.opts.autoformat
+    vim.g.AutoFormat = (vim.g.AutoFormat == 0 and 1 or 0)
   end
-  if M.opts.autoformat then
+  if vim.g.AutoFormat == 1 then
     print("Enabled format on save")
   else
     print("Disabled format on save")
@@ -78,10 +78,11 @@ end
 
 function M.setup(opts)
   M.opts = opts
+  vim.g.AutoFormat = (opts.autoformat and 1 or 0)
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LspFormat", {}),
     callback = function()
-      if M.opts.autoformat then
+      if M.enabled() then
         M.format()
       end
     end,
