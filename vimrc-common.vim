@@ -53,6 +53,12 @@ set title
 " Highlight the textwidth+1 column:
 set colorcolumn=+1
 
+" Open vertical splits on the right:
+set splitright
+
+" Open horizontal splits below:
+set splitbelow
+
 " Automatically resize a window if textwidth is non-zero.
 "
 " The window width is calculated to be:
