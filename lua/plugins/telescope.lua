@@ -4,6 +4,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     lazy = false,
     keys = {
+      { "<leader> ", "<cmd>Telescope find_files<cr>", desc = "Find files" },
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
       { "<leader>fF", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },

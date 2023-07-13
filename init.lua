@@ -21,6 +21,9 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", keymap_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", keymap_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
 
+-- Easier quit:
+keymap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+
 ----- Neovide -----
 
 -- Set the GUI font:
