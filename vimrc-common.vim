@@ -57,7 +57,7 @@ set colorcolumn=+1
 set splitright
 
 " Open horizontal splits below:
-set splitbelow
+" set splitbelow
 
 " Automatically resize a window if textwidth is non-zero.
 "

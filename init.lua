@@ -13,8 +13,6 @@ vim.cmd.source(vimrc)
 -- Make it easier to edit the keymappings:
 local keymap_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
-keymap("n", "<Leader>on", ":edit $MYVIMRC<CR>", keymap_opts)
-keymap("n", "<Leader>ov", string.format(":edit %s<CR>", vimrc), keymap_opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -33,12 +31,21 @@ vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"
 --   0 = disables cursor animation.
 vim.g.neovide_cursor_animation_length = 0
 
--- Plugins --
+----- Plugins ------
 require("user.lazy")
 
--- Autoformat --
-local format = require("user.lsp.format")
+-- Document our leader groups for 'which-key':
+local wk = require("which-key")
+wk.register({
+  ["<leader>b"] = { name = "+buffer" },
+  ["<leader>c"] = { name = "+code" },
+  ["<leader>f"] = { name = "+file/find" },
+  ["<leader>q"] = { name = "+quit/session" },
+  ["<leader>u"] = { name = "+ui" },
+})
 
+-- Configure LSP formatting:
+local format = require("user.lsp.format")
 format.setup{autoformat = false}
 
 vim.keymap.set("n", "<Leader>uf", format.toggle, { silent = true,
@@ -54,3 +61,6 @@ vim.keymap.set("n", "<Leader>cf",
     desc = "Format document (LSP)",
   }
 )
+
+
+
