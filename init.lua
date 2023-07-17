@@ -14,6 +14,10 @@ vim.cmd.source(vimrc)
 local keymap_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
+-- Easier buffer navigation:
+keymap("n", "<S-tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer"})
+keymap("n", "<tab>", "<cmd>bnext<cr>", { desc = "Next buffer"})
+
 -- Terminal --
 -- Better terminal navigation
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", keymap_opts)
@@ -65,5 +69,9 @@ vim.keymap.set("n", "<Leader>cf",
   }
 )
 
-
+-- Bufferline keymaps --
+for i=1,10 do
+  keymap("n", "<leader>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>",
+  { silent=true, desc = "Buffer " .. i})
+end
 
