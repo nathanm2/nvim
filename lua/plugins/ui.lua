@@ -15,7 +15,9 @@ return {
     dependencies = 'nvim-tree/nvim-web-devicons',
     opts = {
       options = {
-        numbers = "both",
+        numbers = function(o)
+          return string.format('%s.%s', o.ordinal, o.lower(o.id))
+        end
       }
     },
   },

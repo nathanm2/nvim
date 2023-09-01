@@ -4,6 +4,10 @@ local function config(plugin, opts)
   -- Otherwise it causes the buffer to shift to the right when we're editing.
   vim.opt.signcolumn = "yes"
 
+  vim.diagnostic.config {
+    severity_sort = true,
+  }
+
   local lspconfig = require("lspconfig")
   lspconfig.rust_analyzer.setup {}
   lspconfig.pylsp.setup{}

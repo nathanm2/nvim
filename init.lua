@@ -70,8 +70,23 @@ vim.keymap.set("n", "<Leader>cf",
 )
 
 -- Bufferline keymaps --
-for i=1,10 do
+for i=1,9 do
   keymap("n", "<leader>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>",
   { silent=true, desc = "Buffer " .. i})
 end
+
+keymap("n", "<leader>0", "<cmd>lua require(\"bufferline\").go_to(1, true)<cr>",
+{ silent=true, desc = "First buffer"})
+
+keymap("n", "<leader>$", "<cmd>lua require(\"bufferline\").go_to(-1, true)<cr>",
+{ silent=true, desc = "Last buffer"})
+
+keymap("n", "<leader>bc", "<cmd>BufferLineTogglePin<cr>",
+{ silent=true, desc = "Toggle pin"})
+
+keymap("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>",
+{ silent=true, desc = "Toggle pin"})
+
+keymap("n", "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<cr>",
+{ silent=true, desc = "Delete non-pinned buffers"})
 
