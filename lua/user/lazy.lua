@@ -23,4 +23,8 @@ M.basic_opts = {
   },
 }
 
+function M.setup(spec, opts)
+  require("lazy").setup(spec, opts or M.basic_opts)
+end
+
 return M

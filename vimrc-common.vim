@@ -44,9 +44,6 @@ set ignorecase
 " case character appears in the search.
 set smartcase
 
-" Show both the current line number and relative line numbers.
-set number relativenumber
-
 " Set the terminal window title
 set title
 
@@ -94,6 +91,9 @@ augroup END
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
+" Easier quit:
+nnoremap  <leader>qq <cmd>qa<cr>
+
 " Easier window movement mappings:
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -138,8 +138,13 @@ nnoremap <leader>e :Lex 30<cr>
 
 " Navigate between buffers:
 nnoremap [b <cmd>exe v:count .. "bprevious"<cr>
+nnoremap <S-tab> <cmd>bprevious<cr>
 nnoremap ]b <cmd>exe v:count .. "bnext"<cr>
+nnoremap <tab> <cmd>bnext<cr>
+
+"  Go to last buffer
 nnoremap <leader>bb :e #<cr>
+
 
 " Navigate the quickfix list
 nnoremap [q <cmd>exe v:count .. "cprev"<cr>

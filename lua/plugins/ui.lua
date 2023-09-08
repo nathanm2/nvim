@@ -15,8 +15,9 @@ return {
     dependencies = 'nvim-tree/nvim-web-devicons',
     opts = {
       options = {
+        separator_style = "slant",
         numbers = function(o)
-          return string.format('%s.%s', o.ordinal, o.lower(o.id))
+          return string.format('%s', o.ordinal)
         end
       }
     },

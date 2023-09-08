@@ -1,11 +1,16 @@
 -- Neovim Configuration
 
+----- Basic Config -----
+
 -- Source our common vim/nvim config.
 --
 -- For config options that you'd like to keep common between vim/nvim:
 local config_dir = vim.fn.stdpath("config")
 local vimrc = config_dir .. "/vimrc-common.vim"
 vim.cmd.source(vimrc)
+
+-- Show relative line numbers
+vim.cmd([[set number relativenumber]])
 
 
 ----- Key Maps ----- 
@@ -14,19 +19,12 @@ vim.cmd.source(vimrc)
 local keymap_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
--- Easier buffer navigation:
-keymap("n", "<S-tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer"})
-keymap("n", "<tab>", "<cmd>bnext<cr>", { desc = "Next buffer"})
-
 -- Terminal --
 -- Better terminal navigation
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", keymap_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", keymap_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", keymap_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
-
--- Easier quit:
-keymap("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
 ----- Neovide -----
 
@@ -45,8 +43,7 @@ vim.g.neovide_cursor_animation_length = 0
 -- Instead of supplying a large table containing all the plugins, the "plugins" string causes Lazy
 -- construct the table by loading everything in 'lua/plugins/*.lua'.
 --
-local lazy = require("user.lazy")
-require("lazy").setup("plugins", lazy.basic_opts)
+require("user.lazy").setup("plugins")
 
 -- Document our leader groups for 'which-key':
 local wk = require("which-key")
