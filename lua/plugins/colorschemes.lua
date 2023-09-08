@@ -38,5 +38,5 @@ return {
     priority = 1000,
     config = gruvbox_config,
   },
-  { "Mofiqul/vscode.nvim", lazy = false },
+  { "Mofiqul/vscode.nvim", lazy = true },
 }

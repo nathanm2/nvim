@@ -14,15 +14,13 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local M = {}  
+
 -- Options to Lazy.nvim:
-local opts = {
+M.basic_opts = {
   ui = {
      border = "rounded"
   },
 }
--- Setup the "Lazy" plugin manager.
---
--- Instead of supplying a large table containing all the plugins, the "plugins" string causes Lazy
--- construct the table by loading everything in 'lua/plugins/*.lua'.
---
-require("lazy").setup("plugins", opts)
+
+return M

@@ -39,7 +39,14 @@ vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"
 vim.g.neovide_cursor_animation_length = 0
 
 ----- Plugins ------
-require("user.lazy")
+
+-- Setup the "Lazy" plugin manager.
+--
+-- Instead of supplying a large table containing all the plugins, the "plugins" string causes Lazy
+-- construct the table by loading everything in 'lua/plugins/*.lua'.
+--
+local lazy = require("user.lazy")
+require("lazy").setup("plugins", lazy.basic_opts)
 
 -- Document our leader groups for 'which-key':
 local wk = require("which-key")
