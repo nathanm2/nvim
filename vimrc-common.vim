@@ -91,6 +91,16 @@ augroup END
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
+" The "local leader" key.
+"
+" The intent is for the leader key to be used globally (regardless of file
+" type), while the "local leader" can enable different action on different file
+" file types.
+"
+" The two can be equal, but it's considered better practice to keep them
+" separate.
+let maplocalleader = "-"
+
 " Easier quit:
 nnoremap  <leader>qq <cmd>qa<cr>
 
@@ -151,6 +161,14 @@ nnoremap [q <cmd>exe v:count .. "cprev"<cr>
 nnoremap ]q <cmd>exe v:count .. "cnext"<cr>
 nnoremap [Q <cmd>cfirst<cr>
 nnoremap ]Q <cmd>clast<cr>
+
+" Navigate the location list
+"
+" A location list is a quickfix list local to a particular window.
+nnoremap [l <cmd>exe v:count .. "lp"<cr>
+nnoremap ]l <cmd>exe v:count .. "lne"<cr>
+nnoremap [L <cmd>lfirst<cr>
+nnoremap ]L <cmd>llast<cr>
 
 
 " -- Insert Mode --
