@@ -26,15 +26,14 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", keymap_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", keymap_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
 
------ Neovide -----
+----- Neovide Configs-----
 
 -- Set the GUI font:
-vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"
+-- vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"
 -- vim.opt.guifont = "DroidSansM Nerd Font Mono:h11"
-
 -- Neovide cursor animation time in seconds:
 --   0 = disables cursor animation.
-vim.g.neovide_cursor_animation_length = 0
+-- vim.g.neovide_cursor_animation_length = 0
 
 ----- Plugins ------
 

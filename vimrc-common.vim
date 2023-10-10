@@ -13,6 +13,12 @@ set termguicolors
 
 " Common Editor Behavior ==============================================
 
+" Highlight all search matches
+set hlsearch
+
+" Perform incremental searching as the search text is entered:
+set incsearch
+
 " Previously, I used the following mappings to copy, cut, and paste
 " to the CLIPBOARD buffer (+):
 "
@@ -23,7 +29,7 @@ set termguicolors
 " However, there appears to be a much better way: simply adding 'unnamedplus'
 " to the clipboard setting causes vim to use the CLIPBOARD buffer instead of
 " the UNNAMED buffer!
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 
 " <Tab> behavior in normal mode:
 "   Part 1: longest:full => Complete till longest common string and show menu.

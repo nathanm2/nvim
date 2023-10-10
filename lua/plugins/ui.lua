@@ -6,6 +6,9 @@ return {
       vim.o.timeoutlen = 500
     end,
   },
+  -- Required by neovim-qt:
+  { "equalsraf/neovim-gui-shim" },
+
   { "nvim-lualine/lualine.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {},
