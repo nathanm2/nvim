@@ -1,4 +1,6 @@
-GuiFont DejaVuSansM Nerd Font Mono:h11
+" GuiFont DejaVuSansM Nerd Font Mono:h11
+GuiFont UbuntuMono Nerd Font Mono:h12
+
 " GuiAdaptiveStyle Fusion
 " GuiAdaptiveFont 1
 GuiTabline 0
@@ -6,7 +8,7 @@ GuiPopupmenu 0
 GuiScrollBar 1
 
 set lines=45
-set columns=101
+set columns=100
 
 " Right Click Context Menu (Copy-Cut-Paste)
 nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>

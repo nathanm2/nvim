@@ -2,45 +2,42 @@
 
 ----- Basic Config -----
 
--- Source our common vim/nvim config.
+-- Source a common vim/nvim config:
 --
--- For config options that you'd like to keep common between vim/nvim:
+-- Useful for those options you'd like to keep common between vim/nvim:
 local config_dir = vim.fn.stdpath("config")
 local vimrc = config_dir .. "/vimrc-common.vim"
 vim.cmd.source(vimrc)
 
--- Show relative line numbers
-vim.cmd([[set number relativenumber]])
-
-
 ----- Key Maps ----- 
 
--- Make it easier to edit the keymappings:
 local keymap_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 -- Terminal --
--- Better terminal navigation
+-- Easier terminal navigation
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", keymap_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", keymap_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", keymap_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
 
------ Neovide Configs-----
-
--- Set the GUI font:
--- vim.opt.guifont = "DejaVuSansMono Nerd Font Mono:h10"
--- vim.opt.guifont = "DroidSansM Nerd Font Mono:h11"
--- Neovide cursor animation time in seconds:
---   0 = disables cursor animation.
--- vim.g.neovide_cursor_animation_length = 0
 
 ----- Plugins ------
 
+-- Configure LSP formatting:
+local format = require("user.lsp.format")
+format.setup{autoformat = false}
+
 -- Setup the "Lazy" plugin manager.
 --
--- Instead of supplying a large table containing all the plugins, the "plugins" string causes Lazy
--- construct the table by loading everything in 'lua/plugins/*.lua'.
+-- By specifying a "plugins" string to setup we cause Lazy to construct the
+-- table of plugins by loading everything in 'lua/plugins/*.lua'.  This should
+-- be a bit more manageable then having everything in a giant table.
+--
+-- I do most plugin configuration down in the plugin files themselves, except
+-- for keymappings which I prefer to have in one place to prevent accidental
+-- clobbering.  The one exception to this latter rule are some of the
+-- keymappings found in `vimrc-common.vim`.
 --
 require("user.lazy").setup("plugins")
 
@@ -53,10 +50,6 @@ wk.register({
   ["<leader>q"] = { name = "+quit/session" },
   ["<leader>u"] = { name = "+ui" },
 })
-
--- Configure LSP formatting:
-local format = require("user.lsp.format")
-format.setup{autoformat = false}
 
 vim.keymap.set("n", "<Leader>uf", format.toggle, { silent = true,
   desc = "Toggle autoformat on write (LSP)",
@@ -92,4 +85,3 @@ keymap("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>",
 
 keymap("n", "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<cr>",
 { silent=true, desc = "Delete non-pinned buffers"})
-

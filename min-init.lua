@@ -1,6 +1,5 @@
 -- A Minimimal Neovim Configuration
-
------ Basic Config -----
+--    nvim -u ~/.config/nvim/min-init.lua
 
 -- Source our common vim/nvim config.
 --

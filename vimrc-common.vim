@@ -136,8 +136,15 @@ nnoremap <c-left> :vertical resize -2<CR>
 nnoremap <c-right> :vertical resize +2<CR>
 
 " Easily clear the last search result by pressing escape.
-nnoremap <esc> <cmd>noh<cr><esc>
-inoremap <esc> <cmd>noh<cr><esc>
+"
+" NOTE: This mapping caused vim 8.2 to run `[I` everytime the terminal regained
+" focus.  It could be related to this bug:
+"
+"   https://github.com/vim/vim/commit/85ef2df075a189da8b767d7554caaed8077de868
+" 
+"nnoremap <esc><esc> <cmd>noh<cr><esc>
+"inoremap <esc><esc> <cmd>noh<cr><esc>
+nnoremap <leader>c <cmd>noh<cr>
 
 " Easily toggle the NetRW window
 nnoremap <leader>e :Lex 30<cr>
