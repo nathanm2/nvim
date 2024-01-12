@@ -1,5 +1,9 @@
 -- Neovim Configuration
 
+----- Debugging Tips -----
+-- vim.print(<table>) :: Pretty-print a Lua table.
+-- :messages          :: To see print messages.
+
 ----- Basic Config -----
 
 -- Source a common vim/nvim config:
@@ -27,6 +31,23 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
 -- Configure LSP formatting:
 local format = require("user.lsp.format")
 format.setup{autoformat = false}
+
+
+-- Lazy-load key mappings for telescope
+-- NOTE: This must be defined before the setup of Lazy, since it's used down in the plugin itself.
+function telescope_keys(plugin, keys)
+  return {
+      { "<leader> ", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+      { "<c-p>",      "<cmd>Telescope find_files<cr>", desc = "Find files" },
+      { "<leader>fF", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
+      { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Find string" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
+      { "<leader>fr", "<cmd>Telescope lsp_references<cr>", desc = "LSP references" },
+      { "<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", desc = "LSP incoming calls" },
+    }
+end
 
 -- Setup the "Lazy" plugin manager.
 --

@@ -117,12 +117,12 @@ nnoremap <silent><expr> k v:count == 0 ? "gk" : "k"
 nnoremap <silent> <leader>ul :call ToggleLineNumberType()<cr>
 
 function! ToggleLineNumberType()
-    if &relativenumber && &number
-        setlocal norelativenumber
-    elseif &number
-        setlocal nonumber
+    if !&relativenumber && !&number
+        setlocal number
+    elseif !&relativenumber
+        setlocal relativenumber
     else
-        setlocal number relativenumber
+        setlocal nonumber norelativenumber
     endif
 endfunction
 

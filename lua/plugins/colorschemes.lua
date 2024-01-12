@@ -19,16 +19,19 @@ end
 
 local function gruvbox_config(plugin, opts)
   require("gruvbox").setup(opts)
+
   -- load the colorscheme here
   vim.cmd([[colorscheme gruvbox]])
 end
+
 
 return {
   -- Color schemes --
   { "EdenEast/nightfox.nvim", -- carbonfox
     lazy = true,
     opts = carbonfox_opts,
-    -- config = carbonfox_config
+    priority = 1000,
+    config = carbonfox_config
   },
   { "rebelot/kanagawa.nvim", lazy = true}, -- kanagawa-lotus
   { "folke/tokyonight.nvim", lazy = true},
@@ -36,7 +39,23 @@ return {
   { "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
+    opts = {
+      italic = {
+        strings = false,
+        emphasis = false,
+        comments = false,
+      },
+      -- dim_inactive = true,
+      -- contrast = true,
+    },
     config = gruvbox_config,
   },
   { "Mofiqul/vscode.nvim", lazy = true },
+  { "jacoborus/tender.vim",
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme tender]])
+    end,
+  },
 }
