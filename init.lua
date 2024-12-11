@@ -1,108 +1,33 @@
 -- Neovim Configuration
 
------ Debugging Tips -----
--- vim.print(<table>) :: Pretty-print a Lua table.
--- :messages          :: To see print messages.
+---- Debugging Help ----
 
------ Basic Config -----
+---- Vim Commands
 
--- Source a common vim/nvim config:
+-- :messages                  :: To see print messages.
+-- :map, :nmap, :imap, :vmap  :: Display the key mappings.
+
+---- Lua Commands:
+
+-- vim.print(<table>)         :: Pretty-print a Lua table.
+
+
+----- Common Vim/Nvim Config -----
+
+-- Source a common vim/nvim config file.  Useful for those options you'd like to keep common between
+-- vim/nvim.
 --
--- Useful for those options you'd like to keep common between vim/nvim:
+-- NOTE: This must be done early since it sets the leader key.
 local config_dir = vim.fn.stdpath("config")
 local vimrc = config_dir .. "/vimrc-common.vim"
 vim.cmd.source(vimrc)
 
------ Key Maps ----- 
 
-local keymap_opts = { silent = true }
-local keymap = vim.api.nvim_set_keymap
+----- Lazy.nvim Package Manager -----
 
--- Terminal --
--- Easier terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", keymap_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", keymap_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", keymap_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", keymap_opts)
+-- Lazy.nvim is a popular package manager for Neovim written in Lua.  Lazy.nvim will subsume Vim's
+-- normal package management once enabled.
 
-
------ Plugins ------
-
--- Configure LSP formatting:
-local format = require("user.lsp.format")
-format.setup{autoformat = false}
-
-
--- Lazy-load key mappings for telescope
--- NOTE: This must be defined before the setup of Lazy, since it's used down in the plugin itself.
-function telescope_keys(plugin, keys)
-  return {
-      { "<leader> ", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
-      { "<c-p>",      "<cmd>Telescope find_files<cr>", desc = "Find files" },
-      { "<leader>fF", "<cmd>Telescope git_files<cr>", desc = "Find git files" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-      { "<leader>fs", "<cmd>Telescope grep_string<cr>", desc = "Find string" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
-      { "<leader>fr", "<cmd>Telescope lsp_references<cr>", desc = "LSP references" },
-      { "<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", desc = "LSP incoming calls" },
-    }
-end
-
--- Setup the "Lazy" plugin manager.
---
--- By specifying a "plugins" string to setup we cause Lazy to construct the
--- table of plugins by loading everything in 'lua/plugins/*.lua'.  This should
--- be a bit more manageable then having everything in a giant table.
---
--- I do most plugin configuration down in the plugin files themselves, except
--- for keymappings which I prefer to have in one place to prevent accidental
--- clobbering.  The one exception to this latter rule are some of the
--- keymappings found in `vimrc-common.vim`.
---
-require("user.lazy").setup("plugins")
-
--- Document our leader groups for 'which-key':
-local wk = require("which-key")
-wk.register({
-  ["<leader>b"] = { name = "+buffer" },
-  ["<leader>c"] = { name = "+code" },
-  ["<leader>f"] = { name = "+file/find" },
-  ["<leader>q"] = { name = "+quit/session" },
-  ["<leader>u"] = { name = "+ui" },
-})
-
-vim.keymap.set("n", "<Leader>uf", format.toggle, { silent = true,
-  desc = "Toggle autoformat on write (LSP)",
-})
-
-vim.keymap.set("n", "<Leader>cf",
-  function()
-    require("user.lsp.format").format{force = true}
-  end,
-  {
-    silent = true,
-    desc = "Format document (LSP)",
-  }
-)
-
--- Bufferline keymaps --
-for i=1,9 do
-  keymap("n", "<leader>" .. i, "<cmd>BufferLineGoToBuffer " .. i .. "<cr>",
-  { silent=true, desc = "Buffer " .. i})
-end
-
-keymap("n", "<leader>0", "<cmd>lua require(\"bufferline\").go_to(1, true)<cr>",
-{ silent=true, desc = "First buffer"})
-
-keymap("n", "<leader>$", "<cmd>lua require(\"bufferline\").go_to(-1, true)<cr>",
-{ silent=true, desc = "Last buffer"})
-
-keymap("n", "<leader>bc", "<cmd>BufferLineTogglePin<cr>",
-{ silent=true, desc = "Toggle pin"})
-
-keymap("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>",
-{ silent=true, desc = "Toggle pin"})
-
-keymap("n", "<leader>bP", "<cmd>BufferLineGroupClose ungrouped<cr>",
-{ silent=true, desc = "Delete non-pinned buffers"})
+-- Start the Lazy.nvim package manager.  It's configured to load everything under the 'lua/plugins'
+-- directory.
+require("site.lazy")

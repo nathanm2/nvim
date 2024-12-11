@@ -4,12 +4,26 @@
 "
 
 " Debug Tips ==========================================================
-" 
+"
 " Which script changed an option setting:
 "   :verbose set textwidth?
 
-" Enable 24-bit color support in the terminal:
-set termguicolors
+
+" Leader Key  =======================================================
+"
+" See `:help mapleader`
+"  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+"
+" Using a "leader" key ensures your custom key mappings won't collide with some existing mappings.
+" The "local leader" key is meant for mappings that only take effect for certain types of files.
+"
+" See: https://learnvimscriptthehardway.stevelosh.com/chapters/06.html
+"
+" To use the SPACEBAR as the leader key you need to first remove the existing
+" mapping for SPACE which defaults to moving forward a single key.
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+let maplocalleader = "\\"
 
 " Common Editor Behavior ==============================================
 
@@ -85,18 +99,6 @@ augroup END
 
 " Common Key Maps ===============================================
 
-" -- Normal Mode --
-
-" The leader key.
-"
-" Using this for key maps ensures the map won't collide with some
-" existing mapping.
-"
-" To use the SPACEBAR as the leader key you need to first remove the existing
-" mapping for SPACE which defaults to moving forward a single key.
-nnoremap <SPACE> <Nop>
-let mapleader = " "
-
 " Easier quit:
 nnoremap  <leader>qq <cmd>qa<cr>
 
@@ -126,6 +128,31 @@ function! ToggleLineNumberType()
     endif
 endfunction
 
+" Toggle trailing whitespace highlighting
+highlight RedundantSpaces ctermbg=red guibg=red
+match RedundantSpaces /\s\+$/
+let s:activeh = 1
+function! ToggleH()
+    if s:activeh == 0
+        let s:activeh = 1
+        match RedundantSpaces /\s\+$/
+    else
+        let s:activeh = 0
+        match none
+    endif
+endfunction
+
+nnoremap <silent> <leader>uw :call ToggleH()<cr>
+
+" Function to clear trailing whitespace
+function! TrimTrailingWhitespace()
+  let l:view = winsaveview()
+  keeppatterns %substitute/\m\s\+$//e
+  call winrestview(l:view)
+endfunction
+
+nnoremap <silent> <leader>fw :call TrimTrailingWhitespace()<cr>
+
 " Resize with arrows
 "
 " NOTE: This feels natural for the top-left window, but a bit surprising when
@@ -141,10 +168,10 @@ nnoremap <c-right> :vertical resize +2<CR>
 " focus.  It could be related to this bug:
 "
 "   https://github.com/vim/vim/commit/85ef2df075a189da8b767d7554caaed8077de868
-" 
+"
 "nnoremap <esc><esc> <cmd>noh<cr><esc>
 "inoremap <esc><esc> <cmd>noh<cr><esc>
-nnoremap <leader>c <cmd>noh<cr>
+nnoremap <leader>h <cmd>noh<cr>
 
 " Easily toggle the NetRW window
 nnoremap <leader>e :Lex 30<cr>
@@ -164,6 +191,8 @@ nnoremap [q <cmd>exe v:count .. "cprev"<cr>
 nnoremap ]q <cmd>exe v:count .. "cnext"<cr>
 nnoremap [Q <cmd>cfirst<cr>
 nnoremap ]Q <cmd>clast<cr>
+nnoremap [l <cmd>lnext<cr>
+nnoremap ]l <cmd>lprevious<cr>
 
 
 " -- Insert Mode --
