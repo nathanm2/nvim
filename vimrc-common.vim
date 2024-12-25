@@ -129,22 +129,22 @@ function! ToggleLineNumberType()
 endfunction
 
 " Toggle trailing whitespace highlighting
-highlight RedundantSpaces ctermbg=red guibg=red
-match RedundantSpaces /\s\+$/
+highlight TrailingSpaces ctermbg=red guibg=red
+match TrailingSpaces /\s\+$/
 let s:activeh = 1
-function! ToggleH()
+function! ToggleTrailingSpaceHighlight()
     if s:activeh == 0
         let s:activeh = 1
-        match RedundantSpaces /\s\+$/
+        match TrailingSpaces /\s\+$/
     else
         let s:activeh = 0
         match none
     endif
 endfunction
 
-nnoremap <silent> <leader>uw :call ToggleH()<cr>
+nnoremap <silent> <leader>uw :call ToggleTrailingSpaceHighlight()<cr>
 
-" Function to clear trailing whitespace
+" Function to clear redundant (trailing) whitespace
 function! TrimTrailingWhitespace()
   let l:view = winsaveview()
   keeppatterns %substitute/\m\s\+$//e

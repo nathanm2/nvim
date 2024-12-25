@@ -1,5 +1,6 @@
 " GuiFont DejaVuSansM Nerd Font Mono:h11
-:GuiFont! UbuntuMono Nerd Font Mono:h13
+GuiFont! UbuntuMono Nerd Font Mono:h12
+" GuiFont! Monospace:h11
 
 " GuiAdaptiveStyle Fusion
 " GuiAdaptiveFont 1
